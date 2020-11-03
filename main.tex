@@ -1,0 +1,238 @@
+
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{hyperref}
+\usepackage{amsmath}
+%\usepackage{chngpage}
+%\usepackage{subfig}
+%\usepackage{subfigure}
+%\usepackage{float}
+\usepackage[a4paper,tmargin=1.1in,bmargin=1.1in,lmargin=1.2in,rmargin=1in]{geometry}
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+\usepackage{enumitem}
+\usepackage[algoruled,boxed,lined]{algorithm2e}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage[font={scriptsize}]{subcaption}
+%\usepackage{subcaption}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows,positioning}
+\tikzstyle{startstop}=[ellipse, minimum width=3cm, minimum height=0.6cm,text centered, draw=black, fill=white]
+\tikzstyle{io}=[trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=0.6cm, text centered, draw=black, fill=white]
+\tikzstyle{process}=[rectangle, minimum width=2cm, minimum height=0.6cm, text centered, draw=black, fill=white]
+\tikzstyle{decision}=[diamond, aspect=2, minimum width=1.5cm, minimum height=0.8cm, text centered, draw=black, fill=white]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzset{draw}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[chapter] % reset theorem numbering for each chapter
+\newtheorem{theory}{Theorem}
+\newtheorem{tlem}{Theorem}
+\newtheorem{texmpl}{Theorem}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
+\newtheorem{exmp}[texmpl]{Example} % same for example numbers
+\newtheorem{lem}[tlem]{Lemma}
+
+\newcommand\textbox[1]{%
+  \parbox{.333\textwidth}{#1}%
+}
+
+
+\usepackage{titlesec}
+ 
+
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{0\p@}%
+  {\parindent \z@ \centering
+    \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \large \bfseries \@chapapp\space \thechapter
+        \par\nobreak
+        \vskip 20\p@
+      \fi
+    \fi
+    \interlinepenalty\@M
+    \LARGE \bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}
+\def\@schapter#1{\if@twocolumn
+                   \@topnewpage[\@makeschapterhead{#1}]%
+                 \else
+                   \@makeschapterhead{#1}%
+                   \@afterheading
+                 \fi}
+\def\@makeschapterhead#1{%
+  \vspace*{0\p@}%
+  {\parindent \z@ \centering
+    \normalfont
+    \interlinepenalty\@M
+    \Large \bfseries  #1\par\nobreak
+    \vskip 40\p@
+  }}
+
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-6ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\Large\bfseries}}
+
+\renewcommand\subsection{\@startsection {subsection}{1}{\z@}%
+                                   {-4ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\large\bfseries}}
+
+\makeatother
+
+\begin{document}
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+
+% ############################################################################################################
+%
+% Title Page (only if you want to make it with LaTeX)
+%
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+        
+        \Large
+        \textbf{Simultaneous image fusion and denoising based on multiscale transformation and sparse representation }
+        
+        
+        \vspace{3.8cm}
+        
+        \textsl{
+        Tahiatul Islam\\
+        Roll: 1109056\\
+        Supervisor: Dr. Sheikh Md. Rabiul Islam\\
+        Associate Professor, ECE, KUET}
+        
+        \vspace{2.2cm}
+        
+        \includegraphics[width=0.2\textwidth]{Logo_KUET.png}
+        
+        \vspace{1cm}
+        \Large
+        Department of Electronics \& Communication Engineering\\
+        Khulna University of Engineering \& Technology\\
+        Khulna, Bangladesh\\
+        May, 2016
+        
+    \end{center}
+\end{titlepage}
+
+% ############################################################################################################
+
+
+
+%\setlength{\parindent}{1em}
+%%\setlength{\parskip}{1em}
+%
+%%\usepackage{titlesec}
+%
+%\titlespacing*{\section}
+%{0pt}{5.5ex plus 1ex minus .2ex}{4.3ex plus .2ex}
+%\titlespacing*{\subsection}
+%{0pt}{5.5ex plus 1ex minus .2ex}{4.3ex plus .2ex}
+%
+%%\begin{document}
+%
+
+
+\addtocontents{toc}{~\hfill\textbf{Page}\par}
+
+\chapter*{Acknowledgement}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+%\renewcommand{\abstractname}{Acknowledgements}
+%\begin{abstract}
+With due homage and honor, I want to express my gratitude to Almighty.\\
+
+
+\noindent I express my indebtedness to my dedicated supervisor Dr. sheikh Md. Rabiul Islam ( Associate Professor, Department of Electronics and Communication Engineering, KUET) for his necessary guidance, suggestions and encouragement to all phases of my work. I am also very grateful to our Departmental Head Dr. Md. Faruque Hossain (Professor,  Department of Electronics and Communication Engineering, KUET). I would also like to thank all the teachers who've been much helpful and encouraging in completion of our thesis work.\\
+
+\noindent\textbox{\hfill}\textbox{\hfil \hfil}\textbox{\hfill \textbf{Author}}
+%\end{abstract}
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+%\renewcommand{\abstractname}{Abstract}
+%\begin{abstract}
+Image fusion is one of the currently active area in image processing society.The goal of image fusion is to increase the total information in a single image from number of source images.In previous year different method has been proposed in fusing image and each of them has its own pros \& cons. Multi-scale transform (MST) and sparse representation (SR) based method found most effective in image fusion.In my work i propose a method of image fusion which take the  advantage of both MST and SR in fusing image which also able to remove noise introduced in the source images.
+
+%\end{abstract}
+
+
+%\chapter*{Dedication}
+%To mum and dad
+
+\tableofcontents
+%\addcontentsline{toc}{chapter}{Contents}
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+
+%\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
+\chapter{Introduction}
+\setcounter{page}{2}
+\pagenumbering{arabic}
+\input{chapters/introduction}
+
+\chapter{Multi-Scale Transformation}
+\input{chapters/literature}
+
+\chapter{Sparse Representation of signal}
+\input{chapters/prevapproaches}
+
+\chapter{Image Denoising}
+\input{chapters/dataset}
+
+\chapter{Propsed method}
+\input{chapters/methodology}
+
+\chapter{Experiment setup and fusion evaluation metrics}
+\input{chapters/experiment}
+
+\chapter{Experimental result}
+\input{chapters/result}
+
+\chapter{Conclusion and Future plan}
+\input{chapters/conclusions}
+
+%\chapter{The Architecture}
+%\input{chapters/systemmodel}
+
+%\chapter{Proposed Algorithm}
+%\input{chapters/proposedalgo}
+
+%\chapter{Experimental Result}
+%\input{chapters/performance}
+
+%\chapter{Tools and Recommendations for Future Works}
+%\input{chapters/tools}
+
+%\chapter{Conclusion}
+%\input{chapters/conclusion}
+
+
+%\appendix
+%\chapter{Appendix}
+%\input{chapters/appendix}
+
+\input{Reference}
+
+\end{document}

@@ -1,0 +1,94 @@
+\section{Design considerations for network coding-based multi-item query serving scheme}
+
+The key design considerations for network coding-based multi-item query serving scheme in multi-RSU VANETs are as follows:
+
+\section{Overview of network coding-based multi-item query serving scheme}
+
+In this section we summarize our proposed network coding-based multi-item query serving scheme in multi-RSU VANETs as follows:
+
+\begin{description}\itemsep1pt \parskip0pt \parsep0pt
+  \item[First:] After generating a query, as time passes, the QTD value of a query decreases. So we had to consider the remaining deadline of each query in an RSU
+  \item[Second:] Those queries which don't have sufficient remaining deadline, i.e. slack value are not considered at all during scheduling thus avoiding bandwidth wastage.
+  \item[Third:] During clique formation, maximum clique is formed with a selected so that maximum number of data items can be served in a single broadcast tick which helps to tackle the braodcast utilization problem.
+  \item[Fourth:] During cache information transfer, the whole cache information of vehicle is transferred to the neighbor vehicle according to the heading direction information of the vehicle. This process continues until the vehicle leaves the system. So, while a vehicle is inside the system, its cache information develops gradually contributing to the major factor required in network coding thus helps to properly utilize the bandwidth as well as decrease many vehicles' remaining data items in queries at single broadcast tick.\\
+\end{description}
+
+A comparison of our approach using ADC version  with existing non-coding version of different algorithms whose performance will be evaluated in this report is summarized in Table \ref{table:algoSummery}.
+
+\begin{table}[ht]
+\caption{Comparative design consideration differences of the analyzed scheduling algorithm}  % title of Table
+\scriptsize
+\centering          % used for centering table
+\begin{tabular}{p{2cm} p{6cm} p{3cm} p{2cm}}    % centered columns (4 columns)
+\hline\hline %inserts double horizontal lines
+Algorithm & Scheduling type & Considers query starvation and bandwidth utilization problem & Considers network coding \\[0.5ex]  % inserts table
+%heading
+\hline    % inserts single horizontal line
+FCFS & Query level & No & No  \\      % inserting body of the table
+SIN & Item-level but also considers query deadline & No & No  \\
+TIU & Query-level & Yes & No  \\
+ADC-FCFS & Query level & No & Yes \\
+ADC-SIN & Item-level but also considers query deadline & No & Yes \\
+ADC-TIU & Query-level & Yes & Yes\\
+ADC-QSIN & Query-level & Yes & Yes\\[1ex]  % [1ex] adds vertical space
+\hline          %inserts single line
+\end{tabular}
+\label{table:algoSummery}    % is usedto refer this table in the text
+\end{table}
+
+\section{An example}
+
+In this section, we provide an example to illustrate our design considerations and compare our approach with a network coded query level algorithm (ADC-TIU [Citation]) and its non network coded version (TIU [Citation]) in an RSU.
+
+Let us take into consideration the case in Figure \ref{fig:CRGrapg}(a). Suppose queries $Q_1$, $Q_2$, $Q_3$, $Q_4$, $Q_5$ are submitted by vehicles $c_1$, $c_2$, $c_3$, $c_4$, $c_5$ respectively. All the queries are submitted at the same time. The details of these queries are shown in Table \ref{table:algoExample}.
+
+\begin{table}[ht]
+\caption{Particulars of arrived queries at $RSU_i$.}  % title of Table
+\scriptsize
+\centering          % used for centering table
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}    % centered columns (4 columns)
+\hline\hline %inserts double horizontal lines
+Query & Required data items & Data items in cache & Remaining QTD \\[0.5ex]  % inserts table
+%heading
+\hline    % inserts single horizontal line
+$Q_1$ & $d_1,d_2,d_5$ & $d_3,d_4,d_6$ & 3 \\      % inserting body of the table
+$Q_2$ & $d_2,d_3, d_6$ & $d_1,d_4,d_5$ & 3 \\
+$Q_3$ & $d_1,d_3$ & $d_2,d_4,d_5, d_6$ & 2 \\
+$Q_4$ & $d_2,d_6$ & $d_1,d_3,d_4,d_5$ & 2 \\
+$Q_5$ & $d_4,d_5$ & $d_1,d_2,d_3,d_6$ & 2 \\[1ex]  % [1ex] adds vertical space
+\hline          %inserts single line
+\end{tabular}
+\label{table:algoExample}    % is used to refer this table in the text
+\end{table}
+
+According to our considerations, for TIU algorithm, priority of a query at time $t$ is calculated as:
+
+\begin{equation}
+P_{Q_i}(t)=RO_{Q_i}(t)*Urg_{Q_i}(t)
+\label{eq:priority}
+\end{equation}
+
+where,\\$RO_{Q_i}(t)=average\ overlapping\ frequency\ of\ data\ items$\\\\
+and $Urg_{Q_i}(t)=\frac{1}{Remaining\ Deadline\ of\ (Q_i) * No.\ of\ unserved\ items\ in\ Q_i}$\\
+
+
+Here, the corresponding popularity $P(d_i)$ of the data items are $P(d_1)=2$, $P(d_2)=3$, $P(d_3)=2$, $P(d_4)=1$, $P(d_5)=2$, $P(d_6)=2$. We consider the QTD value of each query as $4.5 seconds$, current $t=0$, size of each data item $SIZE(d_i)=1$ and bandwidth of DCH as $Bandwidth=1$ for our ease of understanding.\\
+
+Using Eq \ref{eq:priority} we calculate $P_{Q_i}(t)$ of all $Q_i$ as find $P_{Q_1}(0)=0.388$, $P_{Q_2}(0)=0.388$, $P_{Q_3}(0)=0.33$, $P_{Q_4}(0)=0.416$, $P_{Q_5}(0)=0.25$. So by definition, we choose $Q_4$ as the most promising query as it has highest priority.\\
+By applying conventional TIU, without network coding, we broadcast items $d_2$ and $d_6$ for query $Q_4$ in two broadcast ticks. Thus now, $t=2$ and remaining items of the remaining queries are $D_{Q_1}=\left\{d_1,d_5\right\}$, $D_{Q_2}=\left\{d_3\right\}$, $D_{Q_3}=\left\{d_1,d_3\right\}$, $D_{Q_5}=\left\{d_4,d_5\right\}$.
+
+
+Now for the next scheduling at $t=2$ we calculate $P_{Q_1}(2)=1$, $P_{Q_2}(2)=1$, $P_{Q_3}(2)=1$, $P_{Q_5}(2)=0.75$. So, for in this case of tie, we take the query which came first, i.e. $Q_1$. For this, we broadcast items remaining $d_1$ and $d_5$ for query $Q_1$ in two broadcast ticks. Now, at $t=4$, remaining items of the remaining queries are $D_{Q_2}=\left\{d_3\right\}$, $D_{Q_3}=\left\{d_3\right\}$, $D_{Q_5}=\left\{d_4\right\}$.
+
+
+We see that as remaining deadline of all the remaining queries $Q_2$, $Q_3$, $Q_5$ are $QTD-t=0.5 secons$, so by convention, these queries will miss their deadlines. So we only have 2 out of 5 queries satisfied.\\
+
+In case of ADC, we first select $Q_4$ by its highest priority and also by its feasibility check by $Remaining_{QTD}(Q_4) \le deadline$. We find maximum clique at $t=0$ with item $d_2\in Q_4$ as $\delta_{max}^{d_6}=\left\{v_{11},v_{26},v_{31},v_{46},v_{54}\right\}$ and $C_{\delta_{max}^{d_6}}=\left\{c_{1},c_{2},c_{3},c_{4},c_{5}\right\}$. Therefore, we broadcast the encoded data $\gamma=d_{1}\oplus d_{4} \oplus d_{2}$ in one time unit. Then we find maximum clique with item $d_2\in Q_4$ at $t=1$ as $\delta_{max}^{d_2}=\left\{v_{42},v_{33},v_{55}\right\}$ and $C_{\delta_{max}^{d_6}}=\left\{c_{3},c_{4},c_{5}\right\}$. Therefore, we broadcast the encoded data $\gamma=d_{2}\oplus d_{3} \oplus d_{5}$ in one time unit.
+
+
+Now, $t=2$ and remaining items of the remaining queries are $D_{Q_1}=\left\{d_2,d_5\right\}$, $D_{Q_2}=\left\{d_2,d_3\right\}$.
+
+
+Now for the next scheduling at $t=2$ we calculate $P_{Q_1}(2)=1.5$, $P_{Q_2}(2)=1.5$. So, for in this case of tie, we take the query which came first, i.e. $Q_1$. For this, we again find maximum cliques for $\left\{d_2,d_5\right\}\in Q_1$ to be $\delta_{max}^{d_5}=\left\{v_{15},v_{23}\right\}$, $C_{\delta_{max}^{d_5}}=\left\{c_{1},c_{2}\right\}$ and $\delta_{max}^{d_2}=\left\{v_{12},v_{22}\right\}$, $C_{\delta_{max}^{d_2}}=\left\{c_{1},c_{2}\right\}$ respectively and broadcast them in sequence by encoding $\gamma=d_{3}\oplus d_{5}$ in one broadcast tick and $\gamma=d_{2}$ in the next. Here, we see, that by $t=4$ all the queries are satisfied.\\
+
+Thus we see that, without network coding, we can satisfy only $Q_4$ and $Q_1$. On the other hand, applying ADC we satisfied all the queries within their deadline. So we can conclude that applying network coding in multi-RSU VANETs surely reduces deadline miss number and improves overall system performance.

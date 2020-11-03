@@ -1,0 +1,54 @@
+During the past few years, many works on various
+multi-label image classification models have been conducted. These models are generally based on two
+types of frameworks: bag-of-words (BoW) \cite{18}, \cite{12},
+\cite{13}, \cite{14} and deep learning \cite{19}.
+
+\section{Bag-of-Words Based Models}
+
+A traditional BoW model is composed of multiple
+modules, e.g., feature representation, classification
+and context modeling. For feature representation,
+the main components include hand-crafted feature
+extraction, feature coding and feature pooling, which
+generate global representations for images. Specifically, hand-crafted features, such as SIFT \cite{3}, Histogram of Oriented Gradients \cite{20} and Local Binary
+Patterns \cite{21} are firstly extracted on dense grids or
+sparse interest points and then quantized by different
+coding schemes, e.g., Vector Quantization \cite{22}, Sparse
+Coding and Gaussian Mixture Models \cite{23}. These
+encoded features are finally pooled by feature aggregation methods, such as Spatial Pyramid Matching
+(SPM) \cite{4}, to form the image-level representation. For
+classification, conventional models, such as SVM \cite{6}
+and random forests \cite{7}, are utilized. Beyond conventional modeling methods, many recent works \cite{18}, \cite{13} have demonstrated that the usage
+of context information, e.g., spatial location of object
+and background scene from the global view, can
+considerably improve the performance of multi-label
+classification and object detection. \hfill \break
+
+Although these works have made great progress
+in visual recognition tasks, the involved hand-crafted
+features are not always optimal for particular tasks.
+Recently, in contrast to hand-crafted features, learnt
+features with deep learning structures have shown
+great potential for various vision recognition tasks,
+which will be introduced in the following subsection.
+
+\section{Deep Learning Based Models}
+
+Deep learning tries to model the high-level abstractions of visual data by using architectures composed of multiple non-linear transformations. Specifically, deep convolutional neural network (CNN) \cite{8}
+has demonstrated an extraordinary ability for image classification \cite{9}, \cite{10} on singlelabel datasets such as CIFAR-10/100 \cite{17} and ImageNet \cite{2}.
+More recently, CNN architectures have been
+adopted to address multi-label problems. Gong et
+al. \cite{19} studied and compared several multi-label
+loss functions for the multi-label annotation problem
+based on a similar network structure to \cite{10}. However,
+due to the large number of parameters to be learned
+for CNN, an effective model requires lots of training
+samples. Therefore, training a task-specific convolutional neural network is not applicable on datasets
+with limited numbers of training samples.
+
+
+
+
+
+
+

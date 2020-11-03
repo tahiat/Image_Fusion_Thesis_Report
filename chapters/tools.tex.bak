@@ -1,0 +1,15 @@
+\section{Used Tools}
+\subsubsection{Torch}
+Torch is a scientific computing framework with wide support for machine learning algorithms. It is easy to use and efficient. At the heart of Torch are the popular neural network and optimization libraries which are simple to use, while having maximum flexibility in implementing complex neural network topologies.\hfill \break 
+
+Our Convolutional Neural Network runs on top of Torch.
+
+\subsubsection{Waffle}
+Waffle is a fast, asynchronous, express-inspired web framework for Torch built on top of ASyNC. \hfill \break
+
+We used this to build a server that classifies the single and multi label images.
+
+\section{Future Works}
+The strength of our multi-label image classification architecture depends on single label convolutional neural network classifier and the method for segmenting images.\hfill \break
+
+So, be refining out convolutional neural network to include more labels by training CIFAR-100 and using better methods to segment the image, we can improve the performance of the network.

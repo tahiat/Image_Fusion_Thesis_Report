@@ -1,0 +1,25 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces (a),(b)Sensor image from two source.(c)Fused image of a,b.\relax }}{1}{figure.caption.1}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Example of a multifocus image.\relax }}{2}{figure.caption.2}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Laplacial pyramid decomposition level\relax }}{4}{figure.caption.3}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces One stage of 2-D DWT multiresolution image decomposition (forward wavelet analysis).\relax }}{5}{figure.caption.4}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces A representation of (a) one-level and (b) two-level image decomposition.\relax }}{6}{figure.caption.5}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces One stage of 2-D DWT multiresolution image reconstruction (backward wavelet synthesis).\relax }}{6}{figure.caption.6}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Selected image patch and its lexicographic ordering vector.\relax }}{12}{figure.caption.7}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Schematic diagram of the proposed SR-based fusion method.\relax }}{12}{figure.caption.8}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces soft and hard thresholding\relax }}{14}{figure.caption.9}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The schematic diagram of the proposed fusion framework\relax }}{17}{figure.caption.10}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Two pairs of source images. (a,b)multi-focus images , and (c,d) Medical images .\relax }}{20}{figure.caption.11}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces The source images used in our experiments. (a) Multi-focus images,(b)medical images and (c) visible-infrared images\relax }}{21}{figure.caption.12}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Example of multifocus image fusion (a)(b) is source image (c)(d)(e)(f)(g) are fusion result for LP-SR, DWR-SR, DTCWT-ST, CVT-SR, NSCT-SR respectivley \relax }}{23}{figure.caption.13}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Example of image fusion (a)MR(b)CT are source images (c)(d)(e)(f)(g) are fusion result for LP-SR, DWR-SR, DTCWT-ST, CVT-SR, NSCT-SR respectivley \relax }}{24}{figure.caption.15}
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Example of image fusion (a)infrared image(b)visible image are source images (c)(d)(e)(f)(g) are fusion result for LP-SR, DWR-SR, DTCWT-ST, CVT-SR, NSCT-SR respectivley \relax }}{24}{figure.caption.17}
+\contentsline {figure}{\numberline {7.4}{\ignorespaces PSNR variation for different value of sigma for multifocus image of first image pair shown in figure \ref {fig:6.1}\relax }}{25}{figure.caption.20}
+\contentsline {figure}{\numberline {7.5}{\ignorespaces PSNR variation for different value of sigma for medical image of first medical image image pair shown in figure \ref {fig:6.1}\relax }}{26}{figure.caption.22}
+\addvspace {10\p@ }

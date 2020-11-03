@@ -1,0 +1,127 @@
+\section{Some new section}
+
+You can summarize in steps:
+
+\begin{description}\itemsep1pt \parskip0pt \parsep0pt
+  \item[Step 1] step 1.
+  \item[Step 2] some steps with sub-steps
+  \begin{description}
+    \item[Step 2.1] sub-step 1
+    \item[Step 2.2] sub-step 2
+    \begin{description}
+      \item[Step 2.2.1] sub-sub-step 1
+      \item[Step 2.2.2] sub-sub-step 2
+    \end{description}
+  \end{description}
+  \item[Step 3] Step something.
+\end{description}
+
+\section{Flowchart}
+
+% be careful using flowcharts, use proper help from internet
+Following Figure \ref{fig:Flowchart}.
+
+\begin{figure}[!h]
+\centering
+\scriptsize
+%% insert newline inside a node by " \\ " , not "\\"
+\begin{tikzpicture}
+  \node[startstop] (start) {Start};
+  \node[io] (cache) [below=0.6cm of start, text width=5cm] {A};
+  \node[process] (QTD) [below=0.6cm of cache, text width=3.5cm] {B};
+  \node[process] (updtTmp) [below=0.6cm of QTD, text width=3.5cm] {C};
+  \node[process] (feasibility) [below=0.6cm of updtTmp, text width=3.5cm] {D};
+  \node[process] (fCheck) [below=0.6cm of feasibility] {E};
+  \node[decision] (isFsbl) [below=0.6cm of fCheck, text width=1.5cm] {F};
+  \node[process] (rmvInfsbl) [left=0.8cm of isFsbl, text width=1.5cm] {I};
+  %% for loopback to fCheck
+  \node [coordinate, left=2cm of fCheck] (point) {};  %% Coordinate on bottom and middle
+  \node[process] (update) [below=0.6cm of isFsbl, text width=2.5cm] {J};
+  \node[decision] (allDone) [below=0.6cm of update, text width=2cm] {K};
+  %% for 2nd column
+  \node [coordinate, left=3cm of allDone] (bottomL) {};  %% Coordinate on bottom and middle
+  \node [coordinate, left=2.9cm of fCheck] (upL) {};  %% Coordinate on right and middle
+  %% for 2nd column
+  \node [coordinate, below=1cm of allDone] (left) {};  %% Coordinate on bottom and middle
+  \node [coordinate, right=3.5cm of left] (bottom) {};  %% Coordinate on right
+  \node [coordinate, above=10.5cm of bottom] (up) {};  %% Coordinate on right and middle
+  \node [coordinate, right=3cm of up] (right) {};
+  \node[process] (nxtItem) [above right=6.7cm and 4cm of allDone, text width=3cm] {L};
+  \node[process] (encode) [below=0.6cm of nxtItem, text width=3cm] {M};
+  \node[process] (broadcast) [below=0.6cm of encode, text width=3.5cm] {N};
+  \node[decision] (allItemDone) [below=0.6cm of broadcast, text width=2cm] {O};
+  %% for loopback to nxtItem
+  \node [coordinate, right=1cm of nxtItem] (pointR) {};  %% Coordinate on bottom and middle
+  \node[process] (updtTemp) [below=0.6cm of allItemDone, text width=3.5cm] {P};
+  \node[process] (updtCache) [below=0.6cm of updtTemp, text width=3.5cm] {Q};
+  \node[decision] (leaveRSU) [below=0.6cm of updtCache, text width=2cm] {R};
+  %% for loopback to QTD
+  \node [coordinate, right=8cm of QTD] (pointRR) {};  %% Coordinate on bottom and middle
+  \node[process] (trnsCache) [below=0.6cm of leaveRSU, text width=3.5cm] {S};
+
+  \draw [arrow] (start) -- (cache);
+  \draw [arrow] (cache) -- (QTD);
+  \draw [arrow] (QTD) -- (updtTmp);
+  \draw [arrow] (updtTmp) -- (feasibility);
+  \draw [arrow] (feasibility) -- (fCheck);
+  \draw [arrow] (fCheck) -- (isFsbl);
+  \draw [arrow] (isFsbl) -- node[anchor=south] {no} (rmvInfsbl);
+  %\draw [arrow] (rmvInfsbl) |- (fCheck);
+  \draw [arrow] (isFsbl) -- node[anchor=east] {yes} (update);
+  \draw [arrow] (update) -- (allDone);
+  \draw [arrow] (allDone) -- node[anchor=south] {no} (bottomL) -- (upL) edge (fCheck);
+  \draw [arrow] (allDone.south) -- node[anchor=west] {yes} (left) -- (bottom) -- (up) -- (right) --  (nxtItem);
+  \draw [arrow] (nxtItem) -- (encode);
+  \draw [arrow] (encode) -- (broadcast);
+  \draw [arrow] (broadcast) -- (allItemDone);
+  \draw [arrow] (allItemDone.east) -| node[anchor=south east] {no}(pointR) -- (nxtItem);
+  \draw [arrow] (allItemDone.south) -- node[anchor=west] {yes} (updtTemp);
+  \draw [arrow] (updtTemp) -- (updtCache);
+  \draw [arrow] (updtCache) -- (leaveRSU);
+  \draw [arrow] (leaveRSU.east) -| node[anchor=south east] {no} (pointRR) -- (QTD);
+  \draw [arrow] (leaveRSU.south) -- node[anchor=west] {yes} (trnsCache);
+
+  %\path[draw,->] (start) edge (cache)
+                 %(cache) edge (QTD)
+                 %(QTD) edge (updtTmp)
+                 %(updtTmp) edge (feasibility)
+                 %(feasibility) edge (fCheck)
+                 %(fCheck) edge (isFsbl)
+                 %(isFsbl.west) edge node[anchor=south] {no} (rmvInfsbl)
+                 %(rmvInfsbl) |- (fCheck)
+                 %(isFsbl.south) -- node[anchor=east] {yes} (update)
+                 %(update) -- (allDone)
+                 %(allDone) -- node[anchor=south] {no} (bottomL) -- (upL) edge (fCheck)
+                 %(allDone.south) -- node[anchor=west] {yes} (left) -- (bottom) -- (up) -- (right) --  (nxtItem)
+                 %;
+
+\end{tikzpicture}
+\linebreak
+\linebreak
+\caption{Flowchart of something} \label{fig:Flowchart}
+\end{figure}
+
+
+\section{Table Example}
+Table \ref{table:algoExample}.
+
+% Here's a table example
+
+\begin{table}[ht]
+\caption{Particulars of arrived queries at $RSU_i$.}  % title of Table
+\scriptsize
+\centering          % used for centering table
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}    % centered columns (4 columns)
+\hline\hline %inserts double horizontal lines
+Query & Required data items & Data items in cache & Remaining QTD \\[0.5ex]  % inserts table
+%heading
+\hline    % inserts single horizontal line
+$Q_1$ & $d_1,d_2,d_5$ & $d_3,d_4,d_6$ & 3 \\      % inserting body of the table
+$Q_2$ & $d_2,d_3, d_6$ & $d_1,d_4,d_5$ & 3 \\
+$Q_3$ & $d_1,d_3$ & $d_2,d_4,d_5, d_6$ & 2 \\
+$Q_4$ & $d_2,d_6$ & $d_1,d_3,d_4,d_5$ & 2 \\
+$Q_5$ & $d_4,d_5$ & $d_1,d_2,d_3,d_6$ & 2 \\[1ex]  % [1ex] adds vertical space
+\hline          %inserts single line
+\end{tabular}
+\label{table:algoExample}    % is used to refer this table in the text
+\end{table}
